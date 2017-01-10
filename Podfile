@@ -3,5 +3,5 @@
 
 target 'WebRTCDemo' do
   pod 'libjingle_peerconnection' 
-
+  pod 'AppRTC'
 end

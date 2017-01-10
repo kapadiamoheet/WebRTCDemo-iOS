@@ -1,14 +1,57 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="uTX-wa-9C2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
+        <scene sceneID="Sld-Fd-iJf">
+            <objects>
+                <viewController id="uTX-wa-9C2" customClass="ViewController" customModule="WebRTCDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9u2-XE-c14"/>
+                        <viewControllerLayoutGuide type="bottom" id="3aM-lp-XrI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XaE-e9-yDk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter room name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FhW-P2-XWa">
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXI-oC-i0d">
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <state key="normal" title="Chat!"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" id="E1c-cK-I3U"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XXI-oC-i0d" firstAttribute="centerX" secondItem="XaE-e9-yDk" secondAttribute="centerX" id="BRo-6D-ni6"/>
+                            <constraint firstItem="FhW-P2-XWa" firstAttribute="leading" secondItem="XaE-e9-yDk" secondAttribute="leading" constant="20" id="FQK-hs-HlU"/>
+                            <constraint firstItem="XXI-oC-i0d" firstAttribute="top" secondItem="FhW-P2-XWa" secondAttribute="bottom" constant="30" id="GOW-LK-lZJ"/>
+                            <constraint firstItem="FhW-P2-XWa" firstAttribute="top" secondItem="9u2-XE-c14" secondAttribute="bottom" constant="50" id="KWa-RM-Vyu"/>
+                            <constraint firstAttribute="trailing" secondItem="FhW-P2-XWa" secondAttribute="trailing" constant="20" id="YIR-Jq-3Gy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="roomTextField" destination="FhW-P2-XWa" id="2JG-Iw-a5u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OzW-MW-16F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-422" y="136"/>
+        </scene>
+        <!--Video Chat View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="VideoChatViewController" customModule="WebRTCDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +59,40 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ga-yA-lJz" customClass="RTCEAGLVideoView">
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vU9-Jb-4HR" customClass="RTCEAGLVideoView">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="134" id="3Yq-hh-lGd"/>
+                                            <constraint firstAttribute="height" constant="175" id="OL5-Hx-3Iy"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="vU9-Jb-4HR" secondAttribute="bottom" constant="10" id="4dO-bG-lgS"/>
+                                    <constraint firstAttribute="trailing" secondItem="vU9-Jb-4HR" secondAttribute="trailing" constant="10" id="lzE-nP-SqE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0Ga-yA-lJz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="9et-7k-E5U"/>
+                            <constraint firstItem="0Ga-yA-lJz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="dAw-cN-DSz"/>
+                            <constraint firstAttribute="trailing" secondItem="0Ga-yA-lJz" secondAttribute="trailing" id="g3m-Rn-uDA"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0Ga-yA-lJz" secondAttribute="bottom" id="sCo-B3-9Db"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="localView" destination="vU9-Jb-4HR" id="Mut-Fr-69r"/>
+                        <outlet property="remoteView" destination="0Ga-yA-lJz" id="EuZ-mF-TAN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="297" y="123"/>
         </scene>
     </scenes>
 </document>

@@ -9,19 +9,30 @@
 import UIKit
 import AVFoundation
 class ViewController: UIViewController,RTCPeerConnectionDelegate,RTCSessionDescriptionDelegate {
-    let rtcFactory = RTCPeerConnectionFactory()
+    
+    @IBOutlet weak var roomTextField: UITextField!
+    let rtcFactory : RTCPeerConnectionFactory = RTCPeerConnectionFactory()
     let mediaConstraints = RTCMediaConstraints(mandatoryConstraints: [RTCPair(key: "OfferToReceiveAudio", value: "true"),RTCPair(key: "OfferToReceiveVideo", value: "true")], optionalConstraints: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+//        configureChat()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? UIViewController{
+            if vc is VideoChatViewController{
+                (vc as! VideoChatViewController).roomName = self.roomTextField!.text!
+            }
+        }
+    }
+    
     func configureChat()
     {
         RTCPeerConnectionFactory.initializeSSL()
@@ -32,8 +43,7 @@ class ViewController: UIViewController,RTCPeerConnectionDelegate,RTCSessionDescr
         /*Note: The RTCPeerConnectionFactory object needs to be alive for the entire duration of your WebRTC session, so you should either make it a singleton or make sure it is retained by using a property (thanks to @tomfilk for pointing this out in the comments!). For simplicity I have not done this in the example above.*/
         
         let url = NSURL(string: "https://file.com")
-        let iceServer = RTCICEServer(uri:url as URL! , username: "Mohit", password: "123456")
-        
+        let iceServer : RTCICEServer = RTCICEServer(uri:url as URL! , username: "Mohit", password: "123456")
         let peerConnection = rtcFactory.peerConnection(withICEServers: [iceServer], constraints: nil, delegate: self)
         
         
@@ -55,16 +65,20 @@ class ViewController: UIViewController,RTCPeerConnectionDelegate,RTCSessionDescr
             RTCVideoTrack *videoTrack = [factory videoTrackWithID:videoId source:videoSource];
             [localStream addVideoTrack:videoTrack];
         }*/
-        
-        let localStream = rtcFactory.mediaStream(withLabel: "someUniqueLabel")
-        if let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo){
-            if let capturer = RTCVideoCapturer(deviceName: captureDevice.localizedName){
-                if let videoSource = rtcFactory.videoSource(with: capturer, constraints: nil){
-                    if let videoTrack = rtcFactory.videoTrack(withID: "unique_1", source: videoSource){
-                        localStream?.addVideoTrack(videoTrack)
-                        peerConnection?.add(localStream)
+        AVAudioSession.sharedInstance().requestRecordPermission { (isAllowed) in
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { (isAllowed) in
+                let localStream = self.rtcFactory.mediaStream(withLabel: "someUniqueLabel")
+                if let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo){
+                    if let capturer = RTCVideoCapturer(deviceName: captureDevice.localizedName!){
+                        if let videoSource = self.rtcFactory.videoSource(with: capturer, constraints: nil){
+                            if let videoTrack = self.rtcFactory.videoTrack(withID: "unique_1", source: videoSource){
+                                localStream?.addVideoTrack(videoTrack)
+                                peerConnection?.add(localStream)
+                            }
+                        }
                     }
                 }
+                
             }
         }
         
@@ -86,9 +100,7 @@ class ViewController: UIViewController,RTCPeerConnectionDelegate,RTCSessionDescr
     
     //Delegate
     
-    
-    func didCreateSessionDescription(peerConnection:RTCPeerConnection?,sdp:RTCSessionDescription?,error:NSError?)
-    {
+    func peerConnection(_ peerConnection: RTCPeerConnection!, didCreateSessionDescription sdp: RTCSessionDescription!, error: Error!) {
         if error != nil{
             let remoteDesc = RTCSessionDescription(type: "offer", sdp: sdp?.description)
             peerConnection!.setRemoteDescriptionWith(self, sessionDescription: remoteDesc)
@@ -104,11 +116,11 @@ class ViewController: UIViewController,RTCPeerConnectionDelegate,RTCSessionDescr
             // Send offer through the signaling channel of our application
         }else if peerConnection.signalingState == RTCSignalingHaveRemoteOffer || peerConnection.signalingState == RTCSignalingHaveRemotePrAnswer {
             // If we have a remote offer we should add it to the peer connection
-//            [peerConnection createAnswerWithConstraints:constraints];
+            //            [peerConnection createAnswerWithConstraints:constraints];
             peerConnection.createAnswer(with: self, constraints: mediaConstraints)
         }
-    }    
-
+    }
+    
     func peerConnection(_ peerConnection: RTCPeerConnection!, gotICECandidate candidate: RTCICECandidate!) {
         let candidate : RTCICECandidate = RTCICECandidate(mid: "abc", index: 010, sdp: "alfa")
         peerConnection.add(candidate)
@@ -123,6 +135,30 @@ class ViewController: UIViewController,RTCPeerConnectionDelegate,RTCSessionDescr
         
         // RTCEAGLVideoView is a subclass of UIView, so renderView
         // can be inserted into your view hierarchy where it suits your application.
+    }
+    
+    func peerConnection(_ peerConnection: RTCPeerConnection!, signalingStateChanged stateChanged: RTCSignalingState) {
+        
+    }
+    
+    func peerConnection(_ peerConnection: RTCPeerConnection!, removedStream stream: RTCMediaStream!) {
+        
+    }
+    
+    func peerConnection(onRenegotiationNeeded peerConnection: RTCPeerConnection!) {
+        
+    }
+    
+    func peerConnection(_ peerConnection: RTCPeerConnection!, iceConnectionChanged newState: RTCICEConnectionState) {
+        
+    }
+    
+    func peerConnection(_ peerConnection: RTCPeerConnection!, didOpen dataChannel: RTCDataChannel!) {
+        
+    }
+    
+    func peerConnection(_ peerConnection: RTCPeerConnection!, iceGatheringChanged newState: RTCICEGatheringState) {
+        
     }
 }
 

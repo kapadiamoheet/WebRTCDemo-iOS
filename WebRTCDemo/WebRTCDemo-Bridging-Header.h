@@ -25,4 +25,10 @@
 #import "RTCICECandidate.h"
 #import "RTCEAGLVideoView.h"
 #import "RTCVideoTrack.h"
+#import "RTCDataChannel.h"
+
+#import "ARDAppClient.h"
+#import "RTCEAGLVideoView.h"
+#import "RTCVideoTrack.h"
+
 #endif /* WebRTCDemo_Bridging_Header_h */

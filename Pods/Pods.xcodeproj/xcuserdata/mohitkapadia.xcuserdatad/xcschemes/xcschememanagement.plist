@@ -4,7 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AppRTC.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-WebRTCDemo.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SocketRocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -12,7 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2EC0C92746202A135518E4A74FFBDD58</key>
+		<key>5B7B9F2109F87F811797B0FFA8B03420</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7A27E8579DBA9E0954C04E092A6FE7D4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B20D737686659282C46DC1383D815E77</key>
 		<dict>
 			<key>primary</key>
 			<true/>

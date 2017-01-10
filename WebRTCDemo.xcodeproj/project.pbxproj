@@ -13,6 +13,7 @@
 		C859F3B61E23FBEA00735718 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C859F3B51E23FBEA00735718 /* Assets.xcassets */; };
 		C859F3B91E23FBEA00735718 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C859F3B71E23FBEA00735718 /* LaunchScreen.storyboard */; };
 		C859F3C31E2410C600735718 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C859F3C21E2410C600735718 /* AVFoundation.framework */; };
+		C88CC34E1E251A2000FFFC3C /* VideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88CC34D1E251A2000FFFC3C /* VideoChatViewController.swift */; };
 		D1577C580314E25734A0B41A /* libPods-WebRTCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BFE0ED9C3EC73F4574443E /* libPods-WebRTCDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		C859F3BA1E23FBEA00735718 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C859F3C11E240A2D00735718 /* WebRTCDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebRTCDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		C859F3C21E2410C600735718 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C88CC34D1E251A2000FFFC3C /* VideoChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoChatViewController.swift; sourceTree = "<group>"; };
 		DB8DF2C6E141876996459FCE /* Pods-WebRTCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebRTCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebRTCDemo/Pods-WebRTCDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,7 @@
 				C859F3B51E23FBEA00735718 /* Assets.xcassets */,
 				C859F3B71E23FBEA00735718 /* LaunchScreen.storyboard */,
 				C859F3BA1E23FBEA00735718 /* Info.plist */,
+				C88CC34D1E251A2000FFFC3C /* VideoChatViewController.swift */,
 			);
 			path = WebRTCDemo;
 			sourceTree = "<group>";
@@ -129,7 +132,8 @@
 				TargetAttributes = {
 					C859F3AA1E23FBE900735718 = {
 						CreatedOnToolsVersion = 8.1;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = B32ZER8L86;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -219,6 +223,7 @@
 			files = (
 				C859F3B11E23FBEA00735718 /* ViewController.swift in Sources */,
 				C859F3AF1E23FBEA00735718 /* AppDelegate.swift in Sources */,
+				C88CC34E1E251A2000FFFC3C /* VideoChatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,11 +347,17 @@
 			baseConfigurationReference = B68E5108B4B3BACCB450E508 /* Pods-WebRTCDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sandeep Rajput (Z3WSHLWCR3)";
+				DEVELOPMENT_TEAM = B32ZER8L86;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WebRTCDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mohitKapadia.WebRTCDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.infobeans.RISI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/mohitkapadia/Documents/Projects/Demos/WebRTCDemo/WebRTCDemo/WebRTCDemo-Bridging-Header.h";
+				PROVISIONING_PROFILE = "85be151d-eb66-4df9-813a-686b1321177b";
+				PROVISIONING_PROFILE_SPECIFIER = "RISI App Development Profile";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/mohitkapadia/Documents/Project/Demos/WebRTCDemo-iOS/WebRTCDemo/WebRTCDemo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -356,11 +367,18 @@
 			baseConfigurationReference = DB8DF2C6E141876996459FCE /* Pods-WebRTCDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sandeep Rajput (Z3WSHLWCR3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sandeep Rajput (Z3WSHLWCR3)";
+				DEVELOPMENT_TEAM = B32ZER8L86;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WebRTCDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mohitKapadia.WebRTCDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.infobeans.RISI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/mohitkapadia/Documents/Projects/Demos/WebRTCDemo/WebRTCDemo/WebRTCDemo-Bridging-Header.h";
+				PROVISIONING_PROFILE = "85be151d-eb66-4df9-813a-686b1321177b";
+				PROVISIONING_PROFILE_SPECIFIER = "RISI App Development Profile";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/mohitkapadia/Documents/Project/Demos/WebRTCDemo-iOS/WebRTCDemo/WebRTCDemo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
